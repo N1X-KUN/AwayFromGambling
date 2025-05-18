@@ -2,9 +2,9 @@ package com.example.awayfromgambling
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
+import androidx.fragment.app.Fragment
 import com.example.awayfromgambling.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,10 +15,27 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        // Set initial tab
+        loadFragment(HomeTabFragment())
 
-        val navController = navHostFragment.navController
-        binding.bottomNav.setupWithNavController(navController)
+        binding.bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.homeTabFragment -> {
+                    loadFragment(HomeTabFragment())
+                    true
+                }
+                R.id.collectionFragment -> {
+                    loadFragment(CollectionTabFragment())
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+
+    private fun loadFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .commit()
     }
 }

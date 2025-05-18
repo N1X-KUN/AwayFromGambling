@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
+    <!-- Core Colors -->
     <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+    <color name="red">#FF0000</color>
+
+    <!-- App Theme Colors -->
+    <color name="primary_red">#D84D4B</color>
+    <color name="deep_red">#B22222</color>
+    <color name="light_red">#FF6B6B</color>
+    <color name="background_gradient_start">#FFFFFF</color> <!-- top-white -->
+    <color name="background_gradient_end">#D84D4B</color>   <!-- bottom-red -->
+
+    <!-- Tap Ripple Effect Colors -->
+    <color name="tap_ripple_1">#FF0000</color>
+    <color name="tap_ripple_2">#FF7F00</color>
+    <color name="tap_ripple_3">#FFFF00</color>
+    <color name="tap_ripple_4">#00FF00</color>
+    <color name="tap_ripple_5">#0000FF</color>
+    <color name="tap_ripple_6">#4B0082</color>
+    <color name="tap_ripple_7">#8B00FF</color>
+
+    <!-- Locked Card Placeholder -->
+    <color name="locked_card_background">#000000</color>
+    <color name="locked_card_question_mark">#D84D4B</color>
 </resources>
