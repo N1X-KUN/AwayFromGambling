@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/wallbg">
+
+    <!-- Header -->
+    <TextView
+        android:id="@+id/myCardsLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="MY CARDS"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:background="#c50002"
+        android:gravity="center"
+        android:padding="12dp" />
+
+    <!-- Owned / Missing Filter -->
+    <LinearLayout
+        android:id="@+id/filterBar"
+        android:layout_below="@id/myCardsLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="8dp"
+        android:background="#990000">
+
+        <Button
+            android:id="@+id/ownedButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="OWNED"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:background="@drawable/selector" />
+
+        <Button
+            android:id="@+id/missingButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/selector"
+            android:text="MISSING"
+            android:textAllCaps="true"
+            android:textColor="@color/red" />
+
+    </LinearLayout>
+
+    <!-- RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/filterBar"
+        android:layout_above="@id/footer"
+        android:padding="8dp"
+        android:clipToPadding="false" />
+
+    <!-- Footer -->
+    <LinearLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:background="#ebebeb"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/afk"
+            app:tint="@android:color/black"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GET MORE CARDS"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="16sp" />
+    </LinearLayout>
+</RelativeLayout>
