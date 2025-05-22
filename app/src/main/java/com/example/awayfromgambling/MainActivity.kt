@@ -2,40 +2,33 @@ package com.example.awayfromgambling
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import com.example.awayfromgambling.databinding.ActivityMainBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.example.awayfromgambling.CollectionTabFragment
+import com.example.awayfromgambling.HomeTabFragment
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
-        // Set initial tab
-        loadFragment(HomeTabFragment())
+        val openCollection = intent.getBooleanExtra("openCollection", false)
+        val fragment = if (openCollection) CollectionTabFragment() else HomeTabFragment()
 
-        binding.bottomNav.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.homeTabFragment -> {
-                    loadFragment(HomeTabFragment())
-                    true
-                }
-                R.id.collectionFragment -> {
-                    loadFragment(CollectionTabFragment())
-                    true
-                }
-                else -> false
-            }
-        }
+        supportFragmentManager.beginTransaction()
+            .replace(android.R.id.content, fragment)
+            .commit()
     }
 
-    private fun loadFragment(fragment: Fragment) {
+    fun switchToCollectionTab() {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment)
+            .replace(android.R.id.content, CollectionTabFragment())
+            .addToBackStack(null)
+            .commit()
+    }
+
+    fun switchToHomeTab() {
+        supportFragmentManager.beginTransaction()
+            .replace(android.R.id.content, HomeTabFragment())
+            .addToBackStack(null)
             .commit()
     }
 }

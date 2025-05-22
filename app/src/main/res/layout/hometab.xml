@@ -1,87 +1,104 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/home_root"
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/gameRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    android:clickable="true"
-    android:focusable="true">
+    android:background="@drawable/background">
 
+    <!-- Draggable character -->
     <ImageView
-        android:id="@+id/rainbowBg"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/gradientbackground"
-        android:alpha="0.2" />
+        android:id="@+id/player"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/maybe"
+        android:contentDescription="Player" />
 
-    <TextView
-        android:id="@+id/appTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="AFG: Away From Gambling"
-        android:textColor="#B71C1C"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        android:background="@drawable/titlebox"
-        android:padding="12dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="64dp" />
+    <!-- Good object -->
+    <ImageView
+        android:id="@+id/goodItem"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="top"
+        android:src="@drawable/primo"
+        android:contentDescription="Good Item"
+        android:layout_marginTop="-100dp" />
 
+    <!-- Bad object -->
+    <ImageView
+        android:id="@+id/badItem"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="top"
+        android:src="@drawable/nrimo"
+        android:contentDescription="Bad Item"
+        android:layout_marginTop="-300dp" />
+
+    <!-- High Score and Score Stack -->
     <LinearLayout
-        android:id="@+id/scoreBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@drawable/scorebox"
-        android:padding="12dp"
-        app:layout_constraintTop_toBottomOf="@id/appTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp">
-
-        <TextView
-            android:id="@+id/scoreText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Score: 0"
-            android:textColor="#B71C1C"
-            android:textSize="20sp" />
+        android:layout_gravity="top|end"
+        android:layout_margin="16dp">
 
         <TextView
             android:id="@+id/highScoreText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="High Score: 0"
-            android:textColor="#D32F2F"
-            android:textSize="16sp"
-            android:layout_marginTop="4dp" />
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/scoreText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Score: 0"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/cardStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textColor="#E53935"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/scoreBox"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+    <!-- Tap info button to switch tabs -->
+    <ImageView
+        android:id="@+id/switchTabsButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="top|start"
+        android:layout_margin="20dp"
+        android:contentDescription="Navigation Tabs"
+        android:src="@drawable/information" />
 
-    <TextView
-        android:id="@+id/createdBy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Created By. Gerard Matthew Guanco Fernandez"
-        android:textSize="14sp"
-        android:textColor="#880E4F"
-        app:layout_constraintTop_toBottomOf="@id/cardStatus"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="64dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Unlock popup -->
+    <LinearLayout
+        android:id="@+id/unlockPopup"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#CC000000"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/unlockedCardImage"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/ochakouraraka" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="You unlocked a new card!"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp" />
+
+        <Button
+            android:id="@+id/continueButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Continue"
+            android:layout_marginTop="20dp" />
+    </LinearLayout>
+</FrameLayout>
