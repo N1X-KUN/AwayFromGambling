@@ -5,86 +5,94 @@
     android:layout_height="match_parent"
     android:background="@drawable/wallbg">
 
-    <!-- Header -->
     <TextView
         android:id="@+id/myCardsLabel"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="MY CARDS"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:textColor="@android:color/white"
-        android:background="#c50002"
+        android:layout_height="70dp"
+        android:background="#17335b"
         android:gravity="center"
-        android:padding="12dp" />
+        android:padding="15dp"
+        android:text="MY CARDS"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
-    <!-- Owned / Missing Filter -->
     <LinearLayout
         android:id="@+id/filterBar"
-        android:layout_below="@id/myCardsLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_below="@id/myCardsLabel"
+        android:background="#001739"
         android:gravity="center"
-        android:padding="8dp"
-        android:background="#990000">
+        android:orientation="horizontal"
+        android:padding="8dp">
 
         <Button
             android:id="@+id/ownedButton"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="36dp"
             android:layout_weight="1"
+            android:background="@drawable/outline"
             android:text="OWNED"
             android:textAllCaps="true"
-            android:textColor="@color/white"
-            android:background="@drawable/selector" />
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/missingButton"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="36dp"
             android:layout_weight="1"
-            android:background="@drawable/selector"
+            android:background="@drawable/outline"
             android:text="MISSING"
             android:textAllCaps="true"
             android:textColor="@color/red" />
-
     </LinearLayout>
 
-    <!-- RecyclerView -->
+    <ImageView
+        android:id="@+id/switchTabsButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="20dp"
+        android:contentDescription="Navigation Tabs"
+        android:src="@drawable/information" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_below="@id/filterBar"
+        android:layout_height="match_parent"
         android:layout_above="@id/footer"
-        android:padding="8dp"
-        android:clipToPadding="false" />
+        android:layout_below="@id/filterBar"
+        android:clipToPadding="false"
+        android:padding="8dp" />
 
     <!-- Footer -->
     <LinearLayout
         android:id="@+id/footer"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="45dp"
         android:layout_alignParentBottom="true"
         android:background="#ebebeb"
         android:gravity="center"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:clickable="true"
+        android:focusable="true">
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:layout_marginEnd="8dp"
             android:src="@drawable/afk"
-            app:tint="@android:color/black"
-            android:layout_marginEnd="8dp" />
+            app:tint="@android:color/black" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="GET MORE CARDS"
             android:textColor="@android:color/black"
-            android:textStyle="bold"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
     </LinearLayout>
 </RelativeLayout>

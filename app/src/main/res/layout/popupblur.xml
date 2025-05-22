@@ -1,0 +1,45 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/navPopupContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#AA000000"> <!-- semi-transparent dark blur -->
+
+    <!-- Popup box -->
+    <LinearLayout
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:background="@android:color/holo_blue_dark"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:elevation="8dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/instructionText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Instruction Guide:\n\nScoring 100 Points Gives You a Random Character.\nCollect 'em all!"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
+            android:paddingBottom="16dp" />
+
+        <Button
+            android:id="@+id/btnTitleScreen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Main Menu" />
+
+        <Button
+            android:id="@+id/btnHomeGame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Play Game" />
+
+        <Button
+            android:id="@+id/btnMyCards"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="My Cards" />
+    </LinearLayout>
+</FrameLayout>
