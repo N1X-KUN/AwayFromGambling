@@ -6,10 +6,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import android.view.View
-import android.widget.VideoView
-import android.view.ViewGroup
-import android.util.DisplayMetrics
 
 class TitleScreenActivity : AppCompatActivity() {
 
@@ -29,14 +25,19 @@ class TitleScreenActivity : AppCompatActivity() {
         val prefs = getSharedPreferences("game_prefs", MODE_PRIVATE)
         isMuted = prefs.getBoolean("isMuted", false)
 
-        // Setup and loop background video with proper scaling
-        setupBackgroundVideo()
-
-        // Setup background music using MusicManager
-        MusicManager.play(this, R.raw.menuost, MusicManager.Screen.TITLE_SCREEN)
-        if (isMuted) {
-            MusicManager.mute()
+        // Setup and loop background video
+        val videoUri = Uri.parse("android.resource://$packageName/${R.raw.titlebg}")
+        videoView.setVideoURI(videoUri)
+        videoView.setOnPreparedListener {
+            it.isLooping = true
+            videoView.start()
         }
+
+        // Setup background music
+        backgroundMusic = MediaPlayer.create(this, R.raw.menuost)
+        backgroundMusic?.isLooping = true
+        backgroundMusic?.setVolume(if (isMuted) 0f else 1f, if (isMuted) 0f else 1f)
+        backgroundMusic?.start()
 
         // Set correct icon on load
         btnToggleAudio.setImageResource(if (isMuted) R.drawable.mute else R.drawable.unmute)
@@ -44,11 +45,7 @@ class TitleScreenActivity : AppCompatActivity() {
         // Toggle mute state on click
         btnToggleAudio.setOnClickListener {
             isMuted = !isMuted
-            if (isMuted) {
-                MusicManager.mute()
-            } else {
-                MusicManager.unmute(this, MusicManager.Screen.TITLE_SCREEN)
-            }
+            backgroundMusic?.setVolume(if (isMuted) 0f else 1f, if (isMuted) 0f else 1f)
             btnToggleAudio.setImageResource(if (isMuted) R.drawable.mute else R.drawable.unmute)
             prefs.edit().putBoolean("isMuted", isMuted).apply()
         }
@@ -73,51 +70,23 @@ class TitleScreenActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupBackgroundVideo() {
-        val videoUri = Uri.parse("android.resource://$packageName/${R.raw.title}")
-        videoView.setVideoURI(videoUri)
-        
-        videoView.setOnPreparedListener { mediaPlayer ->
-            // Calculate the scaling needed to cover the screen
-            val videoRatio = mediaPlayer.videoWidth.toFloat() / mediaPlayer.videoHeight.toFloat()
-            val screenRatio = resources.displayMetrics.widthPixels.toFloat() / resources.displayMetrics.heightPixels.toFloat()
-            
-            val scale: Float
-            if (videoRatio > screenRatio) {
-                // Video is wider than screen, scale by height
-                scale = resources.displayMetrics.heightPixels.toFloat() / mediaPlayer.videoHeight.toFloat()
-            } else {
-                // Video is taller than screen, scale by width
-                scale = resources.displayMetrics.widthPixels.toFloat() / mediaPlayer.videoWidth.toFloat()
-            }
-            
-            // Apply the scaling
-            val layoutParams = videoView.layoutParams
-            layoutParams.width = (mediaPlayer.videoWidth * scale).toInt()
-            layoutParams.height = (mediaPlayer.videoHeight * scale).toInt()
-            videoView.layoutParams = layoutParams
-            
-            mediaPlayer.isLooping = true
-            videoView.start()
-        }
-    }
-
     override fun onPause() {
         super.onPause()
         videoView.pause()
-        MusicManager.stop()
+        backgroundMusic?.pause()
     }
 
     override fun onResume() {
         super.onResume()
         videoView.start()
         if (!isMuted) {
-            MusicManager.play(this, R.raw.menuost, MusicManager.Screen.TITLE_SCREEN)
+            backgroundMusic?.start()
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        MusicManager.stop()
+        backgroundMusic?.release()
+        backgroundMusic = null
     }
 }
