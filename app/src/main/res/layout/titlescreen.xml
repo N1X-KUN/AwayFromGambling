@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/root"
     android:layout_width="match_parent"
@@ -31,31 +32,37 @@
         <Button
             android:id="@+id/btnPlayGame"
             android:layout_width="250dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:text="Play Game"
             android:backgroundTint="#4CAF50"
             android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:layout_marginBottom="16dp" />
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:elevation="8dp"
+            android:layout_marginBottom="20dp" />
 
         <Button
             android:id="@+id/btnMyCardsTitle"
             android:layout_width="250dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:text="My Cards"
             android:backgroundTint="#2196F3"
             android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:layout_marginBottom="16dp" />
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:elevation="8dp"
+            android:layout_marginBottom="20dp" />
 
         <Button
             android:id="@+id/btnQuitApp"
             android:layout_width="250dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:text="Quit App"
             android:backgroundTint="#F44336"
             android:textColor="#FFFFFF"
-            android:textSize="18sp" />
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:elevation="8dp" />
     </LinearLayout>
 
     <!-- AUDIO BUTTON BOTTOM LEFT -->

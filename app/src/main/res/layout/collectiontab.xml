@@ -30,30 +30,30 @@
         <Button
             android:id="@+id/ownedButton"
             android:layout_width="0dp"
-            android:layout_height="36dp"
+            android:layout_height="48dp"
             android:layout_weight="1"
             android:background="@drawable/outline"
             android:text="OWNED"
             android:textAllCaps="true"
-            android:textColor="@color/white" />
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/missingButton"
             android:layout_width="0dp"
-            android:layout_height="36dp"
+            android:layout_height="48dp"
             android:layout_weight="1"
             android:background="@drawable/outline"
             android:text="MISSING"
             android:textAllCaps="true"
-            android:textColor="@color/red" />
+            android:textColor="#FF0000" />
     </LinearLayout>
 
     <ImageView
         android:id="@+id/switchTabsButton"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_margin="20dp"
         android:contentDescription="Navigation Tabs"
         android:src="@drawable/information" />
@@ -74,11 +74,11 @@
         android:layout_height="45dp"
         android:layout_alignParentBottom="true"
         android:background="#ebebeb"
+        android:clickable="true"
+        android:focusable="true"
         android:gravity="center"
         android:orientation="horizontal"
-        android:padding="10dp"
-        android:clickable="true"
-        android:focusable="true">
+        android:padding="10dp">
 
         <ImageView
             android:layout_width="24dp"
