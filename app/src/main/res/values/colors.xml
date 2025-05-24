@@ -24,4 +24,6 @@
     <!-- Locked Card Placeholder -->
     <color name="locked_card_background">#000000</color>
     <color name="locked_card_question_mark">#D84D4B</color>
+
+    <color name="ic_launcher_background">#5D265F</color>
 </resources>

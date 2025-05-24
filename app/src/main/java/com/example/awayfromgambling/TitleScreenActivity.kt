@@ -16,7 +16,6 @@ class TitleScreenActivity : AppCompatActivity() {
     private lateinit var videoView: VideoView
     private lateinit var btnToggleAudio: ImageButton
     private var isMuted = false
-    private var backgroundMusic: MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,18 +101,23 @@ class TitleScreenActivity : AppCompatActivity() {
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-        videoView.pause()
-        MusicManager.stop()
-    }
-
     override fun onResume() {
         super.onResume()
         videoView.start()
+        // Only play music if not muted
         if (!isMuted) {
             MusicManager.play(this, R.raw.menuost, MusicManager.Screen.TITLE_SCREEN)
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        videoView.pause()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        MusicManager.stop()
     }
 
     override fun onDestroy() {

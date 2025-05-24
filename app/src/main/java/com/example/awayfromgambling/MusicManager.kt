@@ -33,15 +33,28 @@ object MusicManager {
             return
         }
 
-        if (musicResId == currentTrack) return
-        stop()
-        if (isMuted) return
+        // If same track is already playing and not muted, don't restart
+        if (musicResId == currentTrack && mediaPlayer?.isPlaying == true && !isMuted) return
 
-        mediaPlayer = MediaPlayer.create(context, musicResId)
-        currentTrack = musicResId
-        currentScreen = screen
-        mediaPlayer?.isLooping = true
-        mediaPlayer?.start()
+        try {
+            // Create new player before stopping old one to prevent gap
+            val newPlayer = MediaPlayer.create(context, musicResId)
+            newPlayer.isLooping = true
+            newPlayer.setVolume(if (isMuted) 0f else 1.0f, if (isMuted) 0f else 1.0f)
+            
+            // Start new player
+            newPlayer.start()
+            
+            // Stop and release old player
+            stop()
+            
+            // Set new player as current
+            mediaPlayer = newPlayer
+            currentTrack = musicResId
+            currentScreen = screen
+        } catch (e: Exception) {
+            Log.e("MusicManager", "Error playing music", e)
+        }
     }
 
     private fun isValidMusicForScreen(musicResId: Int, screen: Screen): Boolean {
@@ -49,8 +62,16 @@ object MusicManager {
     }
 
     fun stop() {
-        mediaPlayer?.stop()
-        mediaPlayer?.release()
+        try {
+            mediaPlayer?.apply {
+                if (isPlaying) {
+                    stop()
+                }
+                release()
+            }
+        } catch (e: Exception) {
+            Log.e("MusicManager", "Error stopping music", e)
+        }
         mediaPlayer = null
         currentTrack = -1
         currentScreen = Screen.NONE
@@ -58,17 +79,19 @@ object MusicManager {
 
     fun mute() {
         isMuted = true
-        stop()
+        mediaPlayer?.setVolume(0f, 0f)
     }
 
     fun unmute(context: Context, screen: Screen) {
         isMuted = false
-        // Restart the last played music for the current screen if available
-        screenMusicMap[screen]?.firstOrNull()?.let { musicResId ->
-            play(context, musicResId, screen)
+        mediaPlayer?.setVolume(1.0f, 1.0f)
+        if (mediaPlayer?.isPlaying != true) {
+            // Restart music if it's not playing
+            screenMusicMap[screen]?.firstOrNull()?.let { musicResId ->
+                play(context, musicResId, screen)
+            }
         }
     }
-
 
     fun getCurrentScreen(): Screen = currentScreen
 }

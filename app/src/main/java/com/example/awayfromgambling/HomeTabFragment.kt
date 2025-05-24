@@ -380,13 +380,13 @@ class HomeTabFragment : Fragment() {
         // Get the absolute bottom position where items should fall to
         val bottomPosition = rootView.height - player.height - resources.getDimensionPixelSize(android.R.dimen.app_icon_size) / 8f
 
-        val baseSpeed = 10f
+        val baseSpeed = 15f  // Increased base speed
         val items = listOf(goodItem, badItem, badItem2, badItem3)
         
         items.forEach { item ->
             if (item.visibility == View.VISIBLE) {
-                // Move the item
-                val movement = baseSpeed * speedMultiplier * (0.8f + Random.nextFloat() * 0.4f)
+                // Move the item with consistent speed
+                val movement = baseSpeed * speedMultiplier
                 item.y += movement
                 
                 // Check if item has reached the bottom position
@@ -414,15 +414,12 @@ class HomeTabFragment : Fragment() {
     }
 
     private fun getSpeedMultiplier(): Float {
-        val baseMultiplier = when (gamePhase) {
-            GamePhase.FAST_PHASE -> 3.0f
-            GamePhase.MEDIUM_PHASE -> 2.0f
-            GamePhase.NORMAL_PHASE -> 1.5f
+        return when (gamePhase) {
+            GamePhase.FAST_PHASE -> 3.0f    // x3 speed (0-3 seconds)
+            GamePhase.MEDIUM_PHASE -> 2.0f   // x2 speed (3-12 seconds)
+            GamePhase.NORMAL_PHASE -> 1.5f   // x1.5 speed (after 12 seconds)
             GamePhase.NOT_STARTED -> 0f
         }
-        
-        // Remove score-based speed increase to keep consistent speeds
-        return baseMultiplier
     }
 
     private fun showGameOver() {
