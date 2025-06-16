@@ -1,4 +1,4 @@
-GGG - Gerard's Gambling Game
+GGG - Gerard's Great Game
 
 Used Kotlin, Xml, Drawable/Raw Assests (Images, Videos, Audios)
 This app is a game of collecting Primo Stars and Avoid Nrimo Spheres Falling in the Sky, Collect to 100 Points and gain a random character card... Collect All 39 Cards! 
